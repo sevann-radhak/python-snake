@@ -26,6 +26,7 @@ class Snake:
         
         self.snake_pos.append(new_piece)
         
+        
     def create(self):
         self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * 1])
         self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * 2])

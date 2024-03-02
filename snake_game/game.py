@@ -37,8 +37,6 @@ class Game:
        
        
     def run(self):
-        self.snake.create()
-        clicked = False
         while True:   
             self.display.draw_screen() 
             self.display.draw_score(self.score) 
