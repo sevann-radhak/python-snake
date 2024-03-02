@@ -1,9 +1,10 @@
 import pygame
 from game_display import GameDisplay
-from snake import Snake
+from sna import Snake
 from colors import Colors
 from direction import Direction
 from food import Food
+
 
 class Game:
     def __init__(self):
@@ -16,12 +17,24 @@ class Game:
         self.new_piece = [0, 0]
         self.colors = Colors().colors
         self.snake = Snake(self.screen_width, self.screen_height, self.cell_size)
-        self.display = GameDisplay(self.screen_width, self.screen_height, self.cell_size, self.colors, self.snake, self.new_food)
+        self.display = GameDisplay(self.screen_width, self.screen_height, self.cell_size, self.colors, self.snake)
         self.snake.create()
+        self.clock = pygame.time.Clock()
+        self.FPS = 10
         
+        # self.sna = Sna(self.screen_width, self.screen_height, self.cell_size)
+        # self.sna.sna()
+        self.font = pygame.font.Font(None, 24)
+       
+       
     def run(self):
         self.snake.create()
         while True:   
+         
+            # print('snake pos: ',  type(self.snake.snake_pos[0]), self.snake.snake_pos[0])
+            # print('food: ', type(self.food.pos), self.food.pos)
+            
+     
             self.display.draw_screen()    
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -38,16 +51,23 @@ class Game:
                         self.snake.direction = Direction.RIGHT
             
             self.display.draw_food()
-            self.snake.check_if_snake_has_eaten_the_food(self.food)
             
-            if self.update_snake > 99:
-                self.update_snake = 0        
-                self.snake.move()
+            if self.snake.check_if_snake_has_eaten_the_food(self.display.food):
+                # self.new_food = True
+                self.food.randomize_position()
+                self.new_piece = list(self.snake.snake_pos[-1])
+                self.snake.add_piece(self.new_piece)
+            
+            
+            self.display.draw_food()
+            self.update_snake = 0        
+            self.snake.move()
                 
-            self.display.draw_snake_pos()
-                
+            self.display.draw_snake_pos()                
             pygame.display.update()
             self.update_snake += 1
+            
+            self.clock.tick(self.FPS)
    
    
 if __name__ == "__main__":
