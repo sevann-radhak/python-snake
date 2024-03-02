@@ -1,6 +1,7 @@
 class Colors:
     def __init__(self):
         self.colors = {
+            'black': (0, 0, 0),
             'dark-green': (34, 139, 34),
             'darker-green': (0, 100, 0),
             'light-green': (144, 238, 144),

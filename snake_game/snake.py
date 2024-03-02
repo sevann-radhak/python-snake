@@ -6,11 +6,7 @@ class Snake:
         self.screen_height = screen_height
         self.cell_size = cell_size
         self.snake_pos = [[int(self.screen_width/2), int(self.screen_height/2)]]
-        # print('snake position')
-        # print(self.snake_pos[0])
-        self.direction = Direction.UP
-        
-        self.player = 1
+        self.direction = Direction.UP     
         self.game_is_over = False
         
     
@@ -28,7 +24,6 @@ class Snake:
         elif self.direction == Direction.LEFT: 
             new_piece[0] += self.cell_size  
         
-        print('len:', len(self.snake_pos))
         self.snake_pos.append(new_piece)
         
     def create(self):
@@ -38,11 +33,8 @@ class Snake:
         
         
     def move(self):
-        # print(f'self.snake_pos[0]: {self.snake_pos[0]}')
-        # First, shift all positions to the right
         self.snake_pos = self.snake_pos[-1:] + self.snake_pos[:-1]
 
-        # Then, update the first position based on the current direction
         if self.direction == Direction.UP:
             self.snake_pos[0][0] = self.snake_pos[1][0]
             self.snake_pos[0][1] = self.snake_pos[1][1] - self.cell_size
@@ -56,11 +48,3 @@ class Snake:
             self.snake_pos[0][1] = self.snake_pos[1][1]
             self.snake_pos[0][0] = self.snake_pos[1][0] - self.cell_size
             
-        # if self.direction == Direction.UP:
-            # self.snake_pos[0] = [self.snake_pos[0][0], self.snake_pos[0][1] - self.cell_size]
-        # elif self.direction == Direction.DOWN:
-        #     self.snake_pos[0] = [self.snake_pos[0][0], self.snake_pos[0][1] + self.cell_size]
-        # elif self.direction == Direction.RIGHT:
-        #     self.snake_pos[0] = [self.snake_pos[0][0] + self.cell_size, self.snake_pos[0][1]]
-        # elif self.direction == Direction.LEFT:
-        #     self.snake_pos[0] = [self.snake_pos[0][0] - self.cell_size, self.snake_pos[0][1]]
