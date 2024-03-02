@@ -15,37 +15,33 @@ class Snake:
     
     
     def add_piece(self, new_piece):
-        if self.direction == Direction.UP:
-            new_piece[1] += self.cell_size
-        elif self.direction == Direction.DOWN:
-            new_piece[1] -= self.cell_size
-        elif self.direction == Direction.RIGHT:
-            new_piece[0] -= self.cell_size
-        elif self.direction == Direction.LEFT: 
-            new_piece[0] += self.cell_size  
-        
+        movements = {
+            Direction.UP: [0, self.cell_size],
+            Direction.DOWN: [0, -self.cell_size],
+            Direction.RIGHT: [-self.cell_size, 0],
+            Direction.LEFT: [self.cell_size, 0]
+        }
+        movement = movements[self.direction]
+        new_piece[0] += movement[0]
+        new_piece[1] += movement[1]
         self.snake_pos.append(new_piece)
         
         
     def create(self):
-        self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * 1])
-        self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * 2])
-        self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * 3])
-        
+        for i in range(1, 4):
+            self.snake_pos.append([int(self.screen_width/2), int(self.screen_height/2) + self.cell_size * i])
+
         
     def move(self):
         self.snake_pos = self.snake_pos[-1:] + self.snake_pos[:-1]
 
-        if self.direction == Direction.UP:
-            self.snake_pos[0][0] = self.snake_pos[1][0]
-            self.snake_pos[0][1] = self.snake_pos[1][1] - self.cell_size
-        elif self.direction == Direction.DOWN:
-            self.snake_pos[0][0] = self.snake_pos[1][0]
-            self.snake_pos[0][1] = self.snake_pos[1][1] + self.cell_size
-        elif self.direction == Direction.RIGHT:
-            self.snake_pos[0][1] = self.snake_pos[1][1]
-            self.snake_pos[0][0] = self.snake_pos[1][0] + self.cell_size
-        elif self.direction == Direction.LEFT:
-            self.snake_pos[0][1] = self.snake_pos[1][1]
-            self.snake_pos[0][0] = self.snake_pos[1][0] - self.cell_size
-            
+        movements = {
+            Direction.UP: [0, -self.cell_size],
+            Direction.DOWN: [0, self.cell_size],
+            Direction.RIGHT: [self.cell_size, 0],
+            Direction.LEFT: [-self.cell_size, 0]
+        }
+        
+        movement = movements[self.direction]
+        self.snake_pos[0][0] = self.snake_pos[1][0] + movement[0]
+        self.snake_pos[0][1] = self.snake_pos[1][1] + movement[1]

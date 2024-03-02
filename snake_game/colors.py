@@ -7,5 +7,6 @@ class Colors:
             'light-green': (144, 238, 144),
             'light-blue': (100, 100, 200),
             'light-gray': (200, 200, 200),
-            'red': (200, 0, 0)
+            'red': (200, 0, 0),
+            'white': (255, 255, 255),
         }
