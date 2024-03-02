@@ -12,7 +12,16 @@ class Snake:
         self.player = 1
         self.game_is_over = False
         
-
+    
+    def check_if_snake_has_eaten_the_food(self, food):
+        print(f'food: {food}')
+        # print(f'food.pos: {food.pos}')
+        # if self.snake_pos[0] == food.pos:
+        #     self.snake_pos.append(self.snake_pos[-1]) 
+        #     food.randomize_position() 
+        #     return True
+        return False
+    
     
     def create(self):
         self.snake_pos = [[int(self.screen_width/2), int(self.screen_height/2)]]        
