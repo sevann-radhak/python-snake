@@ -1,6 +1,6 @@
 import pygame
 from game_display import GameDisplay
-from sna import Snake
+from snake import Snake
 from colors import Colors
 from direction import Direction
 from food import Food
@@ -21,20 +21,12 @@ class Game:
         self.snake.create()
         self.clock = pygame.time.Clock()
         self.FPS = 10
-        
-        # self.sna = Sna(self.screen_width, self.screen_height, self.cell_size)
-        # self.sna.sna()
         self.font = pygame.font.Font(None, 24)
        
        
     def run(self):
         self.snake.create()
         while True:   
-         
-            # print('snake pos: ',  type(self.snake.snake_pos[0]), self.snake.snake_pos[0])
-            # print('food: ', type(self.food.pos), self.food.pos)
-            
-     
             self.display.draw_screen()    
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -53,20 +45,15 @@ class Game:
             self.display.draw_food()
             
             if self.snake.check_if_snake_has_eaten_the_food(self.display.food):
-                # self.new_food = True
                 self.food.randomize_position()
                 self.new_piece = list(self.snake.snake_pos[-1])
                 self.snake.add_piece(self.new_piece)
-            
-            
-            self.display.draw_food()
-            self.update_snake = 0        
+                        
+            self.display.draw_food()      
             self.snake.move()
                 
             self.display.draw_snake_pos()                
-            pygame.display.update()
-            self.update_snake += 1
-            
+            pygame.display.update()            
             self.clock.tick(self.FPS)
    
    
